@@ -1,0 +1,69 @@
+//This is a Sample Code of EventHandler handling data
+
+//Use EventHandling between objects in the same activity
+//or between fragments and activity which pop up the fragment (ex. Dialog Fragment).
+
+//Step 1: Define a custom event 
+
+public class MyEventArgsOS : EventArgs
+    {
+        private int _erase; //field
+
+        public int Erase //property
+        {
+            get { return _erase; }
+            set { _erase = value; }
+        }
+        public MyEventArgsOS(int erase) //Constructor
+            :base()
+        {
+            Erase = erase;
+        }
+    }
+
+//Step 2: Define the EventHandler
+//in the same class where you will fire the event
+
+public event EventHandler<MyEventArgsOS> FireEraseEvent;
+
+//Step 3: Fire the Event
+
+UserClickButton.Click += EraseButton_Click; //Based on User Click
+
+private void EraseButton_Click(object sender, EventArgs e) // Attaching Data as a properties
+        {
+            Console.WriteLine("clicking Delete");
+            FireEraseEvent?.Invoke(this, new MyEventArgsOS() //Check null by using "?"
+            {
+                Erase = Flag
+            });
+        }
+        
+private void EraseButton_Click(object sender, EventArgs e) // Attaching Data through Constructor
+        {
+            Console.WriteLine("clicking Delete"); 
+            FireEraseEvent.Invoke(this, new MyEventArgsOS(Flag)); //Flag defined as puplic int 
+        }        
+        
+//Step 4:        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
