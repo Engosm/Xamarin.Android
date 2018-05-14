@@ -1,0 +1,32 @@
+ //Used to Save and Retreive Data From the Mobile Device Storage
+
+//Instantiate First:
+        ISharedPreferences pref;
+        ISharedPreferencesEditor editor;
+        
+//Define the Pref Manager       
+        pref = PreferenceManager.GetDefaultSharedPreferences(this);
+        editor = pref.Edit();
+        
+// Put the Data
+        editor.PutString(); //example of string
+        editor.Apply();//should be used always to apply
+        
+// Get the Data
+        pref.GetString();
+
+//To Delete Data from Mobile Storage
+        editor.Clear();
+        editor.Apply();    
+        
+//Check for Null       
+        if (pref.Contains("0"))
+            
+//Check for total no of Entries
+        pref.All.Count;  
+                
+//Suggested Method for filling the data from pref edit method to a listview
+        for (int i=0; i<=NoOfItemsInPref; i++)
+        {
+        ArrayList.Add(pref.GetString(Convert.ToString(i), ""));
+        }
