@@ -4,7 +4,7 @@
 //or between fragments and activity which pop up the fragment (ex. Dialog Fragment).
 
 //Step 1: Define a custom event 
-
+**********************************
 public class MyEventArgsOS : EventArgs
     {
         private int _erase; //field
@@ -23,10 +23,12 @@ public class MyEventArgsOS : EventArgs
 
 //Step 2: Define the EventHandler
 //in the same class where you will fire the event
+**************************************************
 
 public event EventHandler<MyEventArgsOS> FireEraseEvent;
 
 //Step 3: Fire the Event
+*************************
 
 UserClickButton.Click += EraseButton_Click; //Based on User Click
 
@@ -45,9 +47,19 @@ private void EraseButton_Click(object sender, EventArgs e) // Attaching Data thr
             FireEraseEvent.Invoke(this, new MyEventArgsOS(Flag)); //Flag defined as puplic int 
         }        
         
-//Step 4:        
+//Step 4: Wire up a Subscriber 
+// subscriber should be in the same Activity ...if subscriber defined in another activity
+//you will receive a null error.
+//subscriber method should have the same signature of the event (i.e: void object sourece event args)
+*****************************************************************************************
         
-        
+this.FireEraseEvent += SecondActivity_FireEraseEvent;
+private void SecondActivity_FireEraseEvent(object sender, MyEventArgsOS e) //subscriber
+        {
+            Console.WriteLine(e.Erase);
+            MySpecialClassToDealWithEvent ms = new MySpecialClassToDealWithEvent(); 
+            ms.ReceivetheEvent(this, e);
+        }
         
         
         
