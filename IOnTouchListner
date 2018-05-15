@@ -18,7 +18,7 @@ example:
 
     public bool OnTouch(View v, MotionEvent e)
         {
-            switch (e.Action)
+            switch (e.Action) // use the code snippet switch and it will generate automatically all the possibilites
             {
                 case MotionEventActions.ButtonPress:
                     button.Text += " Buttion Pressed";//Add your logic here
