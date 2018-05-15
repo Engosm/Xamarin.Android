@@ -1,0 +1,77 @@
+//IOnTouchListner enable you to listn to the user touch on your UI Objects
+//So you catch the user touch and execute your logic !
+
+//Step 1: 
+*********
+Let your Class inherit the View.IOnTouchListener
+example: public class MainActivity : Activity, View.IOnTouchListener
+
+//Step 2: 
+*********
+Add the Listner to your UI Obect
+example: button.SetOnTouchListener(this);
+
+//Step3:
+********
+Introduce the following function and add in your logic:
+example:
+
+    public bool OnTouch(View v, MotionEvent e)
+        {
+            switch (e.Action)
+            {
+                case MotionEventActions.ButtonPress:
+                    button.Text += " Buttion Pressed";//Add your logic here
+
+                    break;
+                case MotionEventActions.ButtonRelease:
+                    button.Text += " Buttion Released";
+                    break;
+                case MotionEventActions.Cancel:
+                    break;
+                case MotionEventActions.Down:
+                    button.Text += " Buttion Down";
+                    break;
+                case MotionEventActions.HoverEnter:
+                    break;
+                case MotionEventActions.HoverExit:
+                    break;
+                case MotionEventActions.HoverMove:
+                    break;
+                case MotionEventActions.Mask:
+                    break;
+                case MotionEventActions.Move:
+                    break;
+                case MotionEventActions.Outside:
+                    break;
+                case MotionEventActions.Pointer1Down:
+                    break;
+                case MotionEventActions.Pointer1Up:
+                    break;
+                case MotionEventActions.Pointer2Down:
+                    break;
+                case MotionEventActions.Pointer2Up:
+                    break;
+                case MotionEventActions.Pointer3Down:
+                    break;
+                case MotionEventActions.Pointer3Up:
+                    break;
+               
+                case MotionEventActions.PointerIdMask:
+                    break;
+                case MotionEventActions.PointerIdShift:
+                    break;
+                
+                case MotionEventActions.Up:
+                    button.Text += " Buttion Up";
+                    break;
+                default:
+                    break;
+            }
+
+            return true ;
+
+        }
+
+
+
