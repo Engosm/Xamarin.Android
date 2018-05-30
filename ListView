@@ -1,0 +1,162 @@
+//First Design your Ticket ... which will be inflated by the Adapter to make each item in ListView
+
+// Ticket Example in XML ( Contains 2 Text and 1 Image)
+**********************************************************
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/WhileBackground"
+    android:padding="8dp">
+    <LinearLayout
+        android:id="@+id/Text"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dip">
+        <TextView
+            android:id="@+id/Text1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FF7F3300"
+            android:textSize="20dip"
+            android:textStyle="italic" />
+        <TextView
+            android:id="@+id/Text2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14dip"
+            android:textColor="#FF267F00"
+            android:paddingLeft="100dip" />
+    </LinearLayout>
+    <ImageView
+        android:id="@+id/Image"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:padding="5dp"
+        android:src="@drawable/share"
+        android:layout_alignParentRight="true" />
+</RelativeLayout>
+
+// you can add another XML file for button animation while clicking ( change from white to green)
+*************************************************************************
+<?xml version="1.0" encoding="utf-8" ?>
+
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+  <item android:state_pressed="true" >
+    <shape>
+      <solid
+          android:color="#70c656" />
+      <stroke
+          android:width="1dp"
+          android:color="#53933f" />
+      <corners
+          android:radius="25dp" />
+      <padding
+          android:left="10dp"
+          android:top="10dp"
+          android:right="10dp"
+          android:bottom="10dp" />
+    </shape>
+  </item>
+  <item>
+    <shape
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:shape="rectangle">
+
+      <!-- Specify a semi-transparent solid green background color -->
+      <solid android:color="#ffffff" />
+
+      <corners android:radius="5dp"></corners>
+
+      <!-- Specify the margins that all content inside the drawable must adhere to -->
+      <padding
+          android:left="5dp"
+          android:right="5dp"
+          android:top="5dp"
+          android:bottom="5dp" />
+
+    </shape>
+  </item>
+</selector>
+
+//In your Layout add a ListView tool from tool menue ( in the place where the list view will shows your data)
+*****************************************************************
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ListView
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/listView1" />
+</LinearLayout>
+
+// In your programming file ( ex. MainActivity.cs ) write down your logic
+*******************************************************
+using System.Collections.Generic;
+
+//On Main Class
+*******************************************************
+List<TableItem> tableItems;
+
+//On protected override void OnCreate(Bundle savedInstanceState)
+// fill the class with data 
+*******************************************************
+ListView listView = FindViewById<ListView>(Resource.Id.listView1); //wiring
+tableItems = new List<TableItem>();
+tableItems.Add(new TableItem("hussein", "devepoer", Resource.Drawable.star1));
+tableItems.Add(new TableItem("ahmed", "admin", Resource.Drawable.star2));
+tableItems.Add(new TableItem("jasim", " manager", Resource.Drawable.star3));
+listView.Adapter = new HomeScreenAdapter(this, tableItems);
+listView.ItemClick += OnListItemClick; // for the item click action
+
+// get item slected
+*******************************************************
+        void OnListItemClick(object sender, AdapterView.ItemClickEventArgs e)
+        {
+            var listView = sender as ListView;
+            var t = tableItems[e.Position];
+            Android.Widget.Toast.MakeText(this, t.Heading, Android.Widget.ToastLength.Short).Show();
+        }
+
+// adpater manage
+*******************************************************
+        // you will use the below in all your program
+        public class HomeScreenAdapter : BaseAdapter<TableItem>
+        {
+            List<TableItem> items;
+            Activity context;
+            public HomeScreenAdapter(Activity context, List<TableItem> items)
+                : base()
+            {
+                this.context = context;
+                this.items = items;
+            }
+            public override long GetItemId(int position)
+            {
+                return position;
+            }
+            public override TableItem this[int position]
+            {
+                get { return items[position]; }
+            }
+            public override int Count
+            {
+                get { return items.Count; }
+            }
+            public override View GetView(int position, View convertView, ViewGroup parent)
+            {
+                var item = items[position];
+                View view = convertView;
+                if (view == null) // no view to re-use, create new
+                    view = context.LayoutInflater.Inflate(Resource.Layout.ticket_news, null);//change here is for only the ticket
+                view.FindViewById<TextView>(Resource.Id.Text1).Text = item.Heading;
+                view.FindViewById<TextView>(Resource.Id.Text2).Text = item.SubHeading;
+                view.FindViewById<ImageView>(Resource.Id.Image).SetImageResource(item.ImageResourceId);
+                return view;
+            }
+        }
