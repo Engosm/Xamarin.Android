@@ -1,0 +1,48 @@
+// Grid Layout Making in XML
+//Install the Support library (Xamarin.Android.Support.v7.GridLayout) from Nuget Packages
+
+//see the below example
+*******************************
+
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:columnCount="2"
+    app:rowCount="3">
+    <TextView
+        app:layout_columnWeight="1"
+        app:layout_rowWeight="1"
+        app:layout_columnSpan="2"
+        android:background="#F44336"
+        android:textSize="70sp"
+        android:text="1st" />
+    <TextView
+        app:layout_columnWeight="1"
+        app:layout_rowWeight="1"
+        android:background="#2196F3"
+        android:textSize="70sp"
+        android:text="2nd" />
+    <TextView
+        app:layout_columnWeight="1"
+        app:layout_rowWeight="1"
+        app:layout_rowSpan="2"
+        android:background="#4CAF50"
+        android:textSize="70sp"
+        android:text="3rd" />
+    <TextView
+        app:layout_columnWeight="1"
+        app:layout_rowWeight="1"
+        android:background="#FFC107"
+        android:textSize="70sp"
+        android:text="4th" />
+</android.support.v7.widget.GridLayout>
+
+*******************************
+//Note the following in the above example
+1. the grid layout is using match parent to fill the screen
+2. use colom and raw count the make your grid
+3. for each element specify the raw weight and colom weight
+4. add the colom span so the item will take more than one colom
+5. add the raw span so the item will take more than one raw
