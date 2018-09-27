@@ -1,5 +1,7 @@
 // Using Sqlite in the Xamarin.Andorid
 
+//The below explaination took from tiffany in youtube
+
 //First Install the Library from Nuget-Packages
 
 //use command from Package Manager Console
@@ -11,8 +13,11 @@ PM>Install-Package sqlite-net-pcl
 using system.io;
 using SQlite;
 
-****Below Shall be: Inside a click button Event delegate ***which will save the Data from user to Data Base**********
+//set up the path string for the database file ( on the class level...in MainActivity)
 
+string dpPath= Path.Combine(System.Enviroment.GetFolerPath(system.Enviroment.specialfolder.personal,"NameOfYourDataBase.db3")
+
+****Below Shall be: Inside a click button Event delegate ***which will save the Data from user to Data Base**********
 
 //set up the path string for the database file
 
@@ -48,6 +53,28 @@ Contact mycontact= new Contact("Osama", "555-555");
 db.insert(mycontact);
 
 ******************end of saving Data to Data Base ************************************
+
+// Now How to Get DATA from our data base
+
+****The following code shall be inside a get button event **********
+
+//First add an empty constructor to the Contact class
+
+public Contact(){}
+
+//setup the db connection
+var db=new SQliteConnection(dpPath);
+
+//Connect to the table that contains the data we want
+var table= db.table<Contact>();
+
+foreach (var item in table)
+{
+Contact myContact = new Contact(item.Name,item.PhoneNumber);
+displaytext.text += myContact + " \n";
+//define a text view in your program and name it displaytext
+
+
 
 
 
