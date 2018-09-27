@@ -1,0 +1,68 @@
+// Using Sqlite in the Xamarin.Andorid
+
+//First Install the Library from Nuget-Packages
+
+//use command from Package Manager Console
+
+PM>Install-Package sqlite-net-pcl
+
+//Add the following
+
+using system.io;
+using SQlite;
+
+****Below Shall be: Inside a click button Event delegate ***which will save the Data from user to Data Base**********
+
+
+//set up the path string for the database file
+
+string dpPath= Path.Combine(System.Enviroment.GetFolerPath(system.Enviroment.specialfolder.personal,"NameOfYourDataBase.db3")
+
+//setup the db connection
+
+var db = new SQliteConnection(dpPath);
+
+//setup a table
+
+//if we want to setup a table structure to be as the same myObject so we have to put the myObject as the following:
+
+db.CreateTable<myObject>();
+
+// example myObject could be Contat having the following:
+Class Contact
+{  public string Name {get;set}
+   public string Phonenumber {get;set}
+   
+   public Contact(string name, string phonenumber)
+   { Name = name;
+     Phonenumber = phonenumber
+   }
+   
+}//end of example
+
+//Now  we can create a new contact object and store it
+Contact mycontact= new Contact("Osama", "555-555");
+
+//store the object in the dp
+
+db.insert(mycontact);
+
+******************end of saving Data to Data Base ************************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
