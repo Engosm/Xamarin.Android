@@ -1,0 +1,26 @@
+// To play audio
+
+1. make a folder in the resource and add all your audio (name if Raw)
+
+2. go to manifest ask for permission for recording vidoes if required  by your app.
+
+3. in main activity:
+
+MediaPlayer player;
+
+4. in OnCreate Method:
+
+player = MediaPlayer.Create(this, Resource.Raw.myaudiofile);
+
+5. set event click for playing your audio
+
+button.click += (sender, e) => { player.start();};
+
+6. you can set  player pause and stop as follow
+
+player.pause();
+player.stop();
+
+7. you can make player.release(); to release you memory after finishing playing your audio
+************************************************************************************************
+
