@@ -1,3 +1,10 @@
+//Below are from new Baghdad Channel
+//its about making a list view by using  our custome ticket and custom adapter
+//You can refer also to ver nice explaination from EDMT Dev channel in youtube, video title : Xamarin Android Full App - 
+4. Adding a Menu Page ...Check it its very nice.
+
+
+
 //First Design your Ticket ... which will be inflated by the Adapter to make each item in ListView
 
 // Ticket Example in XML ( Contains 2 Text and 1 Image)
